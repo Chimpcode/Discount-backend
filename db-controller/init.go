@@ -2,6 +2,9 @@ package db
 
 import "github.com/asdine/storm"
 
+var Db *storm.DB
+
+
 func checkError(e error) {
 	if e != nil {
 		panic(e.Error())
@@ -9,8 +12,8 @@ func checkError(e error) {
 }
 
 func Init() {
-	db, err := storm.Open("my.db")
+	Db, err := storm.Open("my.db")
 	checkError(err)
-	defer db.Close()
+	defer Db.Close()
 }
 

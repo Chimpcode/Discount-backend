@@ -3,17 +3,21 @@ package storage
 import (
 	"github.com/minio/minio-go" // Import Minio library.
 	"log"
+	"io"
+	"io/ioutil"
+	"fmt"
 )
 
 
 const AccessKey  = "CIUZR4SP1N4ZQA7N35FV"
 const SecretKey  = "jUpBEdg2wR0zgkykbTqWK5PBpL4PzcsjZ6ladVW3"
-const EndPoint = "http://127.0.0.1:9000"
-const UseSSL = true
-const Location = "us-east-1"
+const EndPoint = "127.0.0.1:9000"
+const UseSSL = false
+const Location = "sa-east-1"
 
 const ImagesBucket = "images"
 
+var minioClient *minio.Client
 
 func checkError(e error) {
 	if e != nil {
@@ -37,4 +41,27 @@ func InitStorage() {
 
 }
 
+func UploadImage(reader io.Reader, name string) error {
+	fmt.Println("-----Minio>", reader)
+
+	n, err := minioClient.PutObject(ImagesBucket, name, reader, "image/png")
+	fmt.Println("-----Minio>", err)
+
+	if err != nil {
+		return err
+	}
+
+
+	log.Println("Upload", n, "bytes of", name)
+	return nil
+}
+
+func GetImage(name string) ([]byte, error) {
+	object, err := minioClient.GetObject(ImagesBucket, name)
+	if err != nil {
+		return []byte{}, err
+	}
+	data, err := ioutil.ReadAll(object)
+	return data, err
+}
 
