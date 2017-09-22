@@ -1,7 +1,10 @@
 package db
 
+import "time"
+
 type Company struct {
-	Id string `json:"id"`
+	Id string `json:"id" storm:"id"`
+	CreatedAt time.Time `json:"created_at" storm:"index"`
 
 	Name string `json:"name"`
 	Categories []string `json:"categories"`
@@ -10,22 +13,23 @@ type Company struct {
 
 	ActivePosts []string `json:"active_posts"`
 	Subscribes []string `json:"registered"`
+
+
 }
 
 type Post struct {
-	Id string `json:"id"`
+	Id string `json:"id" storm:"id"`
 
-	By string `json:"by"`
+	By string `json:"by" `
 
-	CreatedAt string `json:"created_at"`
+	CreatedAt time.Time `json:"created_at" storm:"index"`
 
-	Title string `json:"title"`
+	Title string `json:"title" fako:"title"`
 	Image string `json:"image"`
 	Description string `json:"description"`
-	Address string `json:"address"`
-	Distance int `json:"distance"`
+	Address string `json:"address" fako:"street_address"`
 
-	Promotion string `json:"promotion"`
+	//Promotion string `json:"promotion"`
 
 	Stock int `json:"stock"`
 
@@ -33,32 +37,39 @@ type Post struct {
 }
 
 type User struct {
-	Id string `json:"id"`
+	Id string `json:"id" storm:"id"`
 
 	Group string `json:"group"`
+	CreatedAt time.Time `json:"created_at" storm:"index"`
 
-	FullName string `json:"full_name"`
+
+	FullName string `json:"full_name" fako:"full_name"`
 	Age int `json:"age"`
-	Sex string `json:"sex"`
+	Gender string `json:"gender" fako:"gender"`
 
 	LoginType string `json:"login_type"`
 
-	Email string `json:"email"`
+	Email string `json:"email" fako:"email_address"`
 
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"username" fako:"username"`
+	Password string `json:"password" fako:"simple_password"`
 
 	FacebookAccount string `json:"facebook_account"`
 
 	LastLocation string `json:"last_location"`
 
 	FollowPosts []string `json:"follow_posts"`
+
+
 }
 
 type Thumbnail struct {
-	Id int32 `storm:"id,increment"`
-	UUID string
-	Name string
-	LocalPath string
-	Size int32
+	Id string `json:"id" storm:"id"`
+
+	Name string `json:"name"`
+	LocalPath string `json:"local_path"`
+
+	Size int32 `json:"size"`
+
+	CreatedAt time.Time `json:"created_at" storm:"index"`
 }

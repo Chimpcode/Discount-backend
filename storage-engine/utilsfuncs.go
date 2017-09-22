@@ -1,15 +1,10 @@
 package storage
 
 import (
-	"os/exec"
-	"log"
+	"github.com/satori/go.uuid"
 )
 
 func GetUUID() string {
-	out, err := exec.Command("uuidgen").Output()
-	if err != nil {
-		log.Fatal(err)
-		return ""
-	}
-	return string(out)
+
+	return uuid.NewV4().String()
 }
