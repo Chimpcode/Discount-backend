@@ -47,6 +47,6 @@ func GetFakePost() *Post {
 	post.Image = imageFake
 
 	fako.Fill(&post)
-
+	//log.Println(post)
 	return &post
 }

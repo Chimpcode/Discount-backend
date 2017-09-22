@@ -20,18 +20,18 @@ type Company struct {
 type Post struct {
 	Id string `json:"id" storm:"id"`
 
-	By string `json:"by" `
+	By string `json:"by" form:"by"`
 
 	CreatedAt time.Time `json:"created_at" storm:"index"`
 
-	Title string `json:"title" fako:"title"`
-	Image string `json:"image"`
-	Description string `json:"description"`
-	Address string `json:"address" fako:"street_address"`
+	Title string `json:"title" fako:"title" form:"title"`
+	Image string `json:"image" form:"image"`
+	Description string `json:"description" form:"description"`
+	Address string `json:"address" fako:"street_address" form:"address"`
 
 	//Promotion string `json:"promotion"`
 
-	Stock int `json:"stock"`
+	Stock int `json:"stock" form:"stock"`
 
 
 }

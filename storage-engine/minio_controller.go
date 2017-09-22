@@ -5,19 +5,18 @@ import (
 	"log"
 	"io"
 	"io/ioutil"
-	"fmt"
 )
 
 
 const AccessKey  = "CIUZR4SP1N4ZQA7N35FV"
 const SecretKey  = "jUpBEdg2wR0zgkykbTqWK5PBpL4PzcsjZ6ladVW3"
-const EndPoint = "127.0.0.1:9000"
+const EndPoint = "10.100.107.38:9000"
 const UseSSL = false
 const Location = "sa-east-1"
 
 const ImagesBucket = "images"
 
-var minioClient *minio.Client
+var MinioClient *minio.Client
 
 func checkError(e error) {
 	if e != nil {
@@ -26,11 +25,12 @@ func checkError(e error) {
 }
 
 func InitStorage() {
-	minioClient, err := minio.New(EndPoint, AccessKey, SecretKey, UseSSL)
+	var err error
+	MinioClient, err = minio.New(EndPoint, AccessKey, SecretKey, UseSSL)
 	checkError(err)
-	err = minioClient.MakeBucket(ImagesBucket, Location)
+	err = MinioClient.MakeBucket(ImagesBucket, Location)
 	if err != nil {
-		exists, err := minioClient.BucketExists(ImagesBucket)
+		exists, err := MinioClient.BucketExists(ImagesBucket)
 		if err == nil && exists {
 			log.Printf("We already own %s\n", ImagesBucket)
 		} else {
@@ -42,10 +42,10 @@ func InitStorage() {
 }
 
 func UploadImage(reader io.Reader, name string) error {
-	fmt.Println("-----Minio->", reader)
+	log.Println("-----Minio->", reader)
 
-	n, err := minioClient.PutObject(ImagesBucket, name, reader, "image/png")
-	fmt.Println("-----Minio->", err)
+	n, err := MinioClient.PutObject(ImagesBucket, name, reader, "image/png")
+	log.Println("-----Minio->", err)
 
 	if err != nil {
 		return err
@@ -57,7 +57,7 @@ func UploadImage(reader io.Reader, name string) error {
 }
 
 func GetImage(name string) ([]byte, error) {
-	object, err := minioClient.GetObject(ImagesBucket, name)
+	object, err := MinioClient.GetObject(ImagesBucket, name)
 	if err != nil {
 		return []byte{}, err
 	}

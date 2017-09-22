@@ -17,7 +17,7 @@ func checkError(e error) {
 
 func Init() {
 	var err error
-	Db, err = storm.Open("my.db", storm.BoltOptions(0644, &bolt.Options{Timeout: 1 * time.Second}))
+	Db, err = storm.Open("my.db", storm.BoltOptions(0644, &bolt.Options{Timeout: 2 * time.Second}))
 	checkError(err)
 }
 
