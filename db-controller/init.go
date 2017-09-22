@@ -12,8 +12,8 @@ func checkError(e error) {
 }
 
 func Init() {
-	Db, err := storm.Open("my.db")
+	var err error
+	Db, err = storm.Open("my.db")
 	checkError(err)
-	defer Db.Close()
 }
 

@@ -42,10 +42,10 @@ func InitStorage() {
 }
 
 func UploadImage(reader io.Reader, name string) error {
-	fmt.Println("-----Minio>", reader)
+	fmt.Println("-----Minio->", reader)
 
 	n, err := minioClient.PutObject(ImagesBucket, name, reader, "image/png")
-	fmt.Println("-----Minio>", err)
+	fmt.Println("-----Minio->", err)
 
 	if err != nil {
 		return err
