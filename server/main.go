@@ -13,7 +13,14 @@ import (
 )
 
 func feedDbWhitPosts(howMuch int) {
-	log.Println(howMuch, " post will created")
+
+	err := db.DeleteAllPosts()
+	if err != nil {
+		log.Println("error:", err.Error())
+		return
+	}
+
+	log.Println(howMuch, "post will created")
 
 	boundA := db.Location{Longitude: -12.007243, Latitude: -77.109899}
 	boundB := db.Location{Longitude: -12.087220, Latitude: -76.959972}

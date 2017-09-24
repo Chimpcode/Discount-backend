@@ -1,5 +1,7 @@
 package db
 
+import "github.com/asdine/storm/q"
+
 func SavePost(post *Post) (string, error) {
 	posts := Db.From("posts")
 	err := posts.Save(post)
@@ -31,4 +33,10 @@ func GetAllPosts() (map[string]Post, error) {
 		allPosts[post.Id] = post
 	}
 	return allPosts, nil
+}
+
+func DeleteAllPosts() error {
+	posts := Db.From("posts")
+	err := posts.Select(q.True()).Delete(new(Post))
+	return err
 }
