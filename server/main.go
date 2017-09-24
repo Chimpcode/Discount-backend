@@ -13,9 +13,13 @@ import (
 )
 
 func feedDbWhitPosts(howMuch int) {
-	log.Println("12 post creating")
+	log.Println(howMuch, " post will created")
+
+	boundA := db.Location{Longitude: -12.007243, Latitude: -77.109899}
+	boundB := db.Location{Longitude: -12.087220, Latitude: -76.959972}
+
 	for i:=0;i<howMuch;i++ {
-		post := db.GetFakePost()
+		post := db.GetFakePost(boundA,boundB)
 		uuid, err := db.SavePost(post)
 		if err != nil {
 			log.Println("error:", err.Error())

@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"log"
 	"github.com/alexflint/go-arg"
+	"math/rand"
+	"time"
 )
 
 func GetCupointConfigFromFile(path string) *CupointConf{

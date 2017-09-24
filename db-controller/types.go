@@ -3,8 +3,8 @@ package db
 import "time"
 
 type Location struct {
-	Longitude string `json:"longitude" form:"longitude"`
-	Latitude string `json:"latitude" form:"latitude"`
+	Longitude float64 `json:"longitude" form:"longitude"`
+	Latitude float64 `json:"latitude" form:"latitude"`
 }
 
 type Company struct {
@@ -18,7 +18,6 @@ type Company struct {
 
 	ActivePosts []string `json:"active_posts"`
 	Subscribes []string `json:"registered"`
-
 
 }
 
@@ -34,10 +33,10 @@ type Post struct {
 	Description string `json:"description" form:"description"`
 	Address string `json:"address" fako:"street_address" form:"address"`
 
+	Location Location `json:"location" form:"location"`
 	//Promotion string `json:"promotion"`
 
 	Stock int `json:"stock" form:"stock"`
-
 
 }
 
@@ -65,7 +64,6 @@ type User struct {
 
 	FollowPosts []string `json:"follow_posts"`
 
-
 }
 
 type Thumbnail struct {
@@ -77,4 +75,5 @@ type Thumbnail struct {
 	Size int32 `json:"size"`
 
 	CreatedAt time.Time `json:"created_at" storm:"index"`
+
 }

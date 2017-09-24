@@ -4,6 +4,7 @@ import (
 	"github.com/wawandco/fako"
 	"../storage-engine"
 	"time"
+	"math/rand"
 )
 
 func GetFakeCompany() *Company{
@@ -38,15 +39,33 @@ func GetFakeUser() *User {
 	return  &user
 }
 
-func GetFakePost() *Post {
+func GetFakePost(boundA, boundB Location) *Post {
 	imageFake := "placeholder.jpeg"
 	var post Post
 
 	post.Id = storage.GetUUID()
 	post.CreatedAt = time.Now()
 	post.Image = imageFake
+	post.Location = *GetRandomLocation(boundA, boundB)
 
 	fako.Fill(&post)
-	//log.Println(post)
+
 	return &post
+}
+
+func GetRandomLocation(a, b Location) *Location {
+	//-12.007243, -77.109899
+	//-12.087220, -76.959972
+	rand.Seed(time.Now().Unix())
+
+	x := a.Longitude-((a.Longitude+b.Longitude)*rand.Float64())
+	y := b.Latitude-((b.Latitude+a.Latitude)*rand.Float64())
+
+	var location Location
+
+	location.Longitude = x
+	location.Latitude = y
+
+	return &location
+
 }
