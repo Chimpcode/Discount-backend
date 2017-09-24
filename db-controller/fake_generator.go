@@ -5,6 +5,7 @@ import (
 	"../storage-engine"
 	"time"
 	"math/rand"
+	"math"
 )
 
 func GetFakeCompany() *Company{
@@ -58,18 +59,19 @@ func GetRandomLocation(a, b Location) *Location {
 	//-12.087220, -76.959972
 	var x float64
 
+
 	if a.Latitude > 0 {
 		x = a.Latitude-((a.Latitude+b.Latitude)*rand.Float64())
 	}else{
-		x = ((a.Latitude+b.Latitude)*rand.Float64()) - a.Latitude
+		x = a.Latitude + ((math.Abs(a.Latitude)+b.Latitude)*rand.Float64())
 	}
 
 	var y float64
 
-	if b.Longitude > 0 {
-		y = b.Longitude-((b.Longitude+a.Longitude)*rand.Float64())
+	if a.Longitude > 0 {
+		y = a.Longitude-((a.Longitude + b.Longitude)*rand.Float64())
 	}else{
-		y = ((b.Longitude+a.Longitude)*rand.Float64()) - b.Longitude
+		y = a.Longitude + ((math.Abs(a.Longitude) + b.Longitude)*rand.Float64())
 	}
 
 
