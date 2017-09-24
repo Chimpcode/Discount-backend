@@ -2,6 +2,11 @@ package db
 
 import "time"
 
+type Location struct {
+	Longitude string `json:"longitude" form:"longitude"`
+	Latitude string `json:"latitude" form:"latitude"`
+}
+
 type Company struct {
 	Id string `json:"id" storm:"id"`
 	CreatedAt time.Time `json:"created_at" storm:"index"`

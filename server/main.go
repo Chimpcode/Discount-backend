@@ -8,6 +8,7 @@ import (
 	"../storage-engine"
 	"../server/external-api"
 	"log"
+	"../global"
 )
 
 func feedDbWhitPosts() {
@@ -25,9 +26,13 @@ func feedDbWhitPosts() {
 }
 
 
+
+
 func main() {
 	db.Init()
-	storage.InitStorage()
+
+	conf := global.GetCupointConfigFromFile("server/cupointconfig.json")
+	storage.InitStorage(conf)
 
 	//feedDbWhitPosts()
 

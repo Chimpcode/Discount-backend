@@ -1,0 +1,7 @@
+{
+    "minio_endpoint": "127.0.0.1:9000",
+    "minio_ak": "CIUZR4SP1N4ZQA7N35FV",
+    "minio_sk": "jUpBEdg2wR0zgkykbTqWK5PBpL4PzcsjZ6ladVW3",
+    "minio_use_ssl": false,
+    "minio_location": "sa-east-1"
+}
