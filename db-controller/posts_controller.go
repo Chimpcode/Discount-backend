@@ -40,3 +40,9 @@ func DeleteAllPosts() error {
 	err := posts.Select(q.True()).Delete(new(Post))
 	return err
 }
+
+func DetelePostById(id string) error {
+	posts := Db.From("posts")
+	err:= posts.Select(q.Eq("Id", id)).Delete(new(Post))
+	return err
+}

@@ -56,10 +56,22 @@ func GetFakePost(boundA, boundB Location) *Post {
 func GetRandomLocation(a, b Location) *Location {
 	//-12.007243, -77.109899
 	//-12.087220, -76.959972
-	rand.Seed(time.Now().Unix())
+	var x float64
 
-	x := a.Latitude-((a.Latitude+b.Latitude)*rand.Float64())
-	y := b.Longitude-((b.Longitude+a.Longitude)*rand.Float64())
+	if a.Longitude > 0 {
+		x = a.Longitude-((a.Longitude+b.Longitude)*rand.Float64())
+	}else{
+		x = ((a.Longitude+b.Longitude)*rand.Float64()) - a.Longitude
+	}
+
+	var y float64
+
+	if b.Latitude > 0 {
+		y = b.Latitude-((b.Latitude+a.Latitude)*rand.Float64())
+	}else{
+		y = ((b.Latitude+a.Latitude)*rand.Float64()) - b.Latitude
+	}
+
 
 	var location Location
 

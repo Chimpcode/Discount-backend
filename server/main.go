@@ -10,6 +10,8 @@ import (
 	"log"
 	"../global"
 
+	"time"
+	"math/rand"
 )
 
 func feedDbWhitPosts(howMuch int) {
@@ -41,6 +43,8 @@ func feedDbWhitPosts(howMuch int) {
 
 
 func main() {
+	rand.Seed(time.Now().Unix())
+
 	db.Init()
 
 	args := global.ParseArguments()
