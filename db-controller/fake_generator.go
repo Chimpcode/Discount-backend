@@ -77,8 +77,9 @@ func GetRandomLocation(a, b Location) *Location {
 
 	var location Location
 
-	location.Longitude = x
-	location.Latitude = y
+
+	location.Latitude = x
+	location.Longitude = y
 
 	return &location
 
