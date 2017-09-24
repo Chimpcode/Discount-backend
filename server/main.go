@@ -73,6 +73,7 @@ func main() {
 
 	external_api.SetPostsAPI(api)
 	external_api.SetImagesAPI(api)
+	external_api.SetMapsAPI(api)
 
 	app.Run(iris.Addr(":9300"), iris.WithoutServerError(iris.ErrServerClosed))
 }
