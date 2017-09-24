@@ -39,7 +39,7 @@ func SetMapsAPI(api iris.Party)  {
 		nearbyPosts := make([]string, 0)
 		for key, post := range posts {
 			if latitude - radio <= post.Location.Latitude  &&  post.Location.Latitude <= latitude + radio {
-				if longitude + radio <= post.Location.Longitude &&  post.Location.Longitude <= longitude + radio {
+				if longitude - radio <= post.Location.Longitude &&  post.Location.Longitude <= longitude + radio {
 					nearbyPosts = append(nearbyPosts, key)
 				}
 			}
