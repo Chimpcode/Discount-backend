@@ -10,4 +10,5 @@ type CupointConf struct {
 
 type Args struct {
 	Conf string
+	DP int
 }

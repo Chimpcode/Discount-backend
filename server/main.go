@@ -12,9 +12,9 @@ import (
 
 )
 
-func feedDbWhitPosts() {
+func feedDbWhitPosts(howMuch int) {
 	log.Println("12 post creating")
-	for i:=0;i<12;i++ {
+	for i:=0;i<howMuch;i++ {
 		post := db.GetFakePost()
 		uuid, err := db.SavePost(post)
 		if err != nil {
@@ -32,11 +32,13 @@ func feedDbWhitPosts() {
 func main() {
 	db.Init()
 
-	configPath := global.ParseArguments().Conf
+	args := global.ParseArguments()
+
+	configPath := args.Conf
 	conf := global.GetCupointConfigFromFile(configPath)
 	storage.InitStorage(conf)
 
-	//feedDbWhitPosts()
+	feedDbWhitPosts(args.DP)
 
 	app := iris.New()
 	app.Use(recover.New())

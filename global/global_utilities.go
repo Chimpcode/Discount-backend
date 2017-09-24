@@ -25,6 +25,7 @@ func GetCupointConfigFromFile(path string) *CupointConf{
 func ParseArguments() *Args{
 	var args Args
 	args.Conf = "server/cupointconfig.json"
+	args.DP = 0
 	arg.MustParse(&args)
 	return &args
 }
