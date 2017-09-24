@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"log"
+	"github.com/alexflint/go-arg"
 )
 
 func GetCupointConfigFromFile(path string) *CupointConf{
@@ -19,4 +20,11 @@ func GetCupointConfigFromFile(path string) *CupointConf{
 		panic(err)
 	}
 	return &conf
+}
+
+func ParseArguments() *Args{
+	var args Args
+	args.Conf = "server/cupointconfig.json"
+	arg.MustParse(&args)
+	return &args
 }

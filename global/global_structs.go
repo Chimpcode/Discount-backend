@@ -7,3 +7,7 @@ type CupointConf struct {
 	MinioUseSsl bool `json:"minio_use_ssl"`
 	MinioLocation string `json:"minio_location"`
 }
+
+type Args struct {
+	Conf string
+}
