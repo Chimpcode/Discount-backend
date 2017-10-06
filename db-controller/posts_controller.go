@@ -1,6 +1,9 @@
 package db
 
-import "github.com/asdine/storm/q"
+import (
+	"github.com/asdine/storm/q"
+	"strings"
+)
 
 func SavePost(post *Post) (string, error) {
 	posts := Db.From("posts")
@@ -38,6 +41,9 @@ func GetAllPosts() (map[string]Post, error) {
 func DeleteAllPosts() error {
 	posts := Db.From("posts")
 	err := posts.Select(q.True()).Delete(new(Post))
+	if strings.Contains(err.Error(), "not found") {
+		return nil
+	}
 	return err
 }
 

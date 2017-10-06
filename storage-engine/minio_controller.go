@@ -42,7 +42,7 @@ func InitStorage(conf *global.CupointConf) {
 			log.Fatalln(err)
 		}
 	}
-	log.Printf("Successfully created %s\n", ImagesBucket)
+	log.Printf("Successfully created %s bucket\n", ImagesBucket)
 
 }
 

@@ -22,7 +22,7 @@ func feedDbWhitPosts(howMuch int) {
 		return
 	}
 
-	log.Println(howMuch, "post will created")
+	log.Println(howMuch, "posts will created")
 
 	boundA := db.Location{Longitude: -12.007243, Latitude: -77.109899}
 	boundB := db.Location{Longitude: -12.087220, Latitude: -76.959972}
