@@ -18,7 +18,7 @@ func feedDbWhitPosts(howMuch int) {
 
 	err := db.DeleteAllPosts()
 	if err != nil {
-		log.Println("error:", err.Error())
+		log.Println("[feeding] error:", err.Error())
 		return
 	}
 
