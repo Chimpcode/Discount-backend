@@ -36,14 +36,21 @@ func SetMapsAPI(api iris.Party)  {
 			return
 		}
 
-		nearbyPosts := make([]string, 0)
+		nearbyPosts := map[string]*db.PostMinified{}
 		for key, post := range posts {
 			if latitude - radio <= post.Location.Latitude  &&  post.Location.Latitude <= latitude + radio {
 				if longitude - radio <= post.Location.Longitude &&  post.Location.Longitude <= longitude + radio {
-					nearbyPosts = append(nearbyPosts, key)
+					nearbyPosts[key], err = db.GetMiniPostById(key)
+					if err!=nil {
+						c.StatusCode(iris.StatusInternalServerError)
+						c.JSON(iris.Map{"error": err.Error()})
+						return
+					}
+
 				}
 			}
 		}
+
 
 		c.StatusCode(200)
 		c.JSON(nearbyPosts)

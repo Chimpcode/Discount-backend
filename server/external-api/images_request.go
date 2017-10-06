@@ -16,17 +16,17 @@ func SetImagesAPI(api iris.Party)  {
 		data, err := storage.GetImage(id)
 		if err != nil {
 			log.Println(err)
-			c.Err()
+			c.JSON(iris.Map{"error": err.Error()})
 		}
 		err = ioutil.WriteFile("./tmp/img_tmp", data, 0666)//os.ModeAppend|os.ModeDir)
 		if err != nil {
 			log.Println(err)
-			c.Err()
+			c.JSON(iris.Map{"error": err.Error()})
 		}
 		err = c.SendFile("./tmp/img_tmp", "image.jpg")
 		if err != nil {
 			log.Println(err)
-			c.Err()
+			c.JSON(iris.Map{"error": err.Error()})
 		}
 	})
 
@@ -50,7 +50,7 @@ func SetImagesAPI(api iris.Party)  {
 		if err != nil {
 			log.Println(err.Error())
 			fmt.Println("-----", err)
-			c.Err()
+			c.JSON(iris.Map{"error": err.Error()})
 		}
 	})
 }

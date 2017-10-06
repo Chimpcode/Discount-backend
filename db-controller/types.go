@@ -77,3 +77,18 @@ type Thumbnail struct {
 	CreatedAt time.Time `json:"created_at" storm:"index"`
 
 }
+
+
+type PostMinified struct {
+	Id string `json:"id" storm:"id"`
+
+	By string `json:"by" form:"by"`
+
+	Title string `json:"title" fako:"title" form:"title"`
+	Location Location `json:"location" form:"location"`
+
+	Stock int `json:"stock" form:"stock"`
+}
+
+
+

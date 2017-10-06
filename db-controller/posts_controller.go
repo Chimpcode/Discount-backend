@@ -46,3 +46,14 @@ func DetelePostById(id string) error {
 	err:= posts.Select(q.Eq("Id", id)).Delete(new(Post))
 	return err
 }
+
+func GetMiniPostById(id string) (*PostMinified, error){
+	miniPost := new(PostMinified)
+	post, err := GetPostById(id)
+	if err != nil {
+		return miniPost, err
+	}
+	miniPost, err = PostToMiniPost(post)
+
+	return miniPost, err
+}
